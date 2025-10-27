@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Check } from "lucide-react"
 import Tabs from "./Tabs"
-import { TemplateCard } from "./Cards"
+import { TemplateCard } from "./cards"
 import { resumeTemplates } from "../utils/data"
 import { DUMMY_RESUME_DATA } from "../utils/data"
 import RenderResume from "./RenderResume"
