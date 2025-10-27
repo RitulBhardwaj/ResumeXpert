@@ -12,9 +12,12 @@ const __dirname = path.dirname(__filename);
 
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-app.use(cors())
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true
+}))
 
 //connect db
 connectDB();
@@ -25,11 +28,7 @@ app.use(express.json())
 app.use("/api/auth",userRouter)
 app.use("/api/resume",resumeRouter)
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'),{
-  setHeaders: (res, path) => {
-    res.set('Access-Control-Allow-Origin', 'http://localhost:5173');
-  }
-}));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 //routes
@@ -38,5 +37,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

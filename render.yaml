@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: resumexpert-backend
+    env: node
+    rootDir: ./backend
+    buildCommand: npm ci --production
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+
+  - type: web
+    name: resumexpert-frontend
+    env: static
+    rootDir: ./frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+
